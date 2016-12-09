@@ -1,0 +1,23 @@
+<div class="container well">
+  <h3>Tareas</h3>
+  <form class="form-group" (submit)="addTodo()">
+    <!-- <label for="tales">Email address</label> -->
+    <input type="text" name="tales" [(ngModel)]="text" class="form-control" placeholder="Agrega una nueva tarea...">
+  </form>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let todo of todos">
+      <div [hidden]="todo.edit">
+        <span [ngClass]="{'task-done': todo.done}">{{todo.text}}</span>
+        <div class="btn-group pull-right" role="group">
+          <button class="remove-item btn btn-default btn-xs" (click)="doneTodo(todo)"><span class="glyphicon" [ngClass]="{'glyphicon-ok' : !todo.done, 'glyphicon-repeat': todo.done}"></span></button>
+          <button class="remove-item btn btn-default btn-xs" (click)="editTodo(todo, focusable)"><span class="glyphicon glyphicon-pencil"></span></button>
+          <button class="remove-item btn btn-default btn-xs" (click)="deleteTodo(todo)"><span class="glyphicon glyphicon-remove"></span></button>
+        </div>
+      </div>
+      <form (submit)="updateTodo(todo)" [hidden]="!todo.edit">
+        <input type="text" name="pascuales" [(ngModel)]="todo.text" class="form-control" #focusable>
+      </form>
+
+    </li>
+  </ul>
+</div>
